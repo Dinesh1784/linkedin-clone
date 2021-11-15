@@ -14,7 +14,7 @@ function App() {
   const dispatch = useDispatch();
   console.log(user);
   React.useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
+     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
         dispatch(
           login({
@@ -28,6 +28,7 @@ function App() {
         dispatch(logout());
       }
     });
+    return unsubscribe();
   }, []);
 
   return (
